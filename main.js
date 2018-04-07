@@ -4,6 +4,7 @@ $(function () {
     const $resultStatus = $('.status');
     const $results = $('.results');
     $submitButton.on('click', function (e) {
+        $('div.result').remove();
         $resultStatus.html('Loading results.....');
         const searchTerm = $searchInput.val();
         const searchQuery = 'https://google.co.in/search?q=' + searchTerm;
