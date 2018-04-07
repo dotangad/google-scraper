@@ -48,6 +48,7 @@ header h1 {
     border-radius: 5px;
     background: none;
     outline: none;
+    font-size: 13px;
 }
 
 .results {
