@@ -3,7 +3,7 @@ $(function () {
     const $searchInput = $('#search');
     const $resultStatus = $('.status');
     const $results = $('.results');
-    $submitButton.on('click', function (e) {
+    $submitButton.on('click', function () {
         $('div.result').remove();
         $resultStatus.html('Loading results.....');
         const searchTerm = $searchInput.val();
@@ -33,12 +33,17 @@ $(function () {
 });
 
 function getPage(link, cb) {
+    $.ajaxSetup({
+        beforeSend: function(request) {
+	    request.setRequestHeader("User-Agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+        }
+    });
     $.ajax({
         'url': 'https://cors-anywhere.herokuapp.com/' + link,
         'method': 'GET',
         'success': function (data) {
-            // console.log('returned something');
-            // console.log(data);
+            console.log('returned something');
+            console.log(data);
             cb(null, data.replace(/<img[^>]*>/g, ""));
         },
         'error': function (err) {
