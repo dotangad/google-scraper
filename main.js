@@ -33,14 +33,16 @@ $(function () {
 });
 
 function getPage(link, cb) {
-    $.ajaxSetup({
-        beforeSend: function(request) {
-	    request.setRequestHeader("User-Agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-        }
+    $.post('/geturl', {
+	'url': link
+    }).done(function(data) {
+	cb(null, data);
+    }).fail(function(err) {
+	cb(err, null);
     });
     $.ajax({
-        'url': 'https://cors-anywhere.herokuapp.com/' + link,
-        'method': 'GET',
+        'url': 'http://localhost:3000/',
+        'method': 'POST',
         'success': function (data) {
             console.log('returned something');
             console.log(data);
